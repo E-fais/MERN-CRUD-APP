@@ -1,6 +1,8 @@
 const express =require('express')
 const { getGoals, postGoal, updateGoal, deleteGoal } = require('../controllers/goalConrollers')
+const {protect}=require('../middleWares/authMiddleware')
 const router= express.Router()
+
 
 // router.get('/', getGoals)
 // router.post('/',postGoal)
@@ -8,6 +10,6 @@ const router= express.Router()
 // router.delete('/:id',deleteGoal)
 
 // clean the code
-router.route('/').get(getGoals).post(postGoal)
-router.route('/:id').put(updateGoal).delete(deleteGoal)
+router.route('/').get(protect,getGoals).post(protect,postGoal)
+router.route('/:id').put(protect,updateGoal).delete(protect,deleteGoal)
 module.exports=router
